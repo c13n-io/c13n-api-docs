@@ -93,6 +93,10 @@
   </li>
   
   <li>
+    <a href="#services.KeySetPageOptions">KeySetPageOptions</a>
+  </li>
+  
+  <li>
     <a href="#services.Message">Message</a>
   </li>
   
@@ -1032,7 +1036,7 @@ previously exchanged messages of the identified discussion.
     
     <tr>
       <td>page_options</td>
-      <td><a href="#services.PageOptions">PageOptions</a></td>
+      <td><a href="#services.KeySetPageOptions">KeySetPageOptions</a></td>
       <td></td>
       <td>
         <p>  </p>
@@ -1271,6 +1275,57 @@ to a GetDiscussions rpc call, and represents a discussion.
 
 <h3 id="services.GetNodesRequest">GetNodesRequest</h3>
 Corresponds to a request to list all nodes on the Lightning Network.
+
+
+
+
+<h3 id="services.KeySetPageOptions">KeySetPageOptions</h3>
+Corresponds to pagination parameters for requests.
+Represents a request for page_size elements,
+terminating with the element with id last_id.
+If reverse is true, the returned elements end with last_id.
+
+
+<table class="field-table">
+  <thead>
+    <tr>
+      <td>Field</td>
+      <td>Type</td>
+      <td>Label</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>last_id</td>
+      <td><a href="#uint64">uint64</a></td>
+      <td></td>
+      <td>
+        <p>The id of the first element of the requested range.  </p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>page_size</td>
+      <td><a href="#int64">int64</a></td>
+      <td></td>
+      <td>
+        <p>The number of elements to return.  </p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>reverse</td>
+      <td><a href="#bool">bool</a></td>
+      <td></td>
+      <td>
+        <p>Whether the range starts or ends with last_id element.  </p>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
 
 
 
@@ -1686,6 +1741,15 @@ of the channel funding transaction must have.<br>In case of a negative value bei
       <td>
         <p>The number of blocks the funding transaction should confirm by.
 This is used for fee estimation.  </p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>sat_per_vbyte</td>
+      <td><a href="#uint64">uint64</a></td>
+      <td></td>
+      <td>
+        <p>The fee rate (satoshis per virtual byte) the funding transaction should cost.  </p>
       </td>
     </tr>
     

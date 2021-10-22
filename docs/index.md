@@ -1,6 +1,8 @@
 
 
-# Services
+# c13n RPC API
+
+## Services
 
 ### ChannelService
 ChannelService exposes endpoints pertaining
@@ -8,7 +10,7 @@ to channel management.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| OpenChannel | OpenChannelRequest | [OpenChannelResponse](#services.OpenChannelResponse) | Opens a channel to a node.<br /><br />Returns immediately after the funding transaction has been published,<br />but does not wait for the channel to be considered open. |
+| OpenChannel | [🔗](#openchannelrequest) | [🔗](#openchannelresponse) | Opens a channel to a node.<br /><br />Returns immediately after the funding transaction has been published,<br />but does not wait for the channel to be considered open. |
 
 
 ### ContactService
@@ -17,10 +19,10 @@ nodes of the Lightning network and contacts.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetContacts | GetContactsRequest | [GetContactsResponse](#services.GetContactsResponse) | Lists all current contacts.<br /><br />Returns a list of all contacts currently in the database. |
-| AddContact | AddContactRequest | [AddContactResponse](#services.AddContactResponse) | Adds a node as a contact.<br /><br />Accepts a node and adds them as a contact in the database. |
-| RemoveContactByID | RemoveContactByIDRequest | [RemoveContactResponse](#services.RemoveContactResponse) | Removes a contact.<br /><br />Accepts a contact id and removes it from the database. |
-| RemoveContactByAddress | RemoveContactByAddressRequest | [RemoveContactResponse](#services.RemoveContactResponse) | Removes a contact.<br /><br />Accepts a contact address and removes it from the database. |
+| GetContacts | [🔗](#getcontactsrequest) | [🔗](#getcontactsresponse) | Lists all current contacts.<br /><br />Returns a list of all contacts currently in the database. |
+| AddContact | [🔗](#addcontactrequest) | [🔗](#addcontactresponse) | Adds a node as a contact.<br /><br />Accepts a node and adds them as a contact in the database. |
+| RemoveContactByID | [🔗](#removecontactbyidrequest) | [🔗](#removecontactresponse) | Removes a contact.<br /><br />Accepts a contact id and removes it from the database. |
+| RemoveContactByAddress | [🔗](#removecontactbyaddressrequest) | [🔗](#removecontactresponse) | Removes a contact.<br /><br />Accepts a contact address and removes it from the database. |
 
 
 ### DiscussionService
@@ -29,12 +31,12 @@ to discussion creation, deletion and history.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetDiscussions | GetDiscussionsRequest | [GetDiscussionsResponse](#services.GetDiscussionsResponse) stream | Creates a unidirectional stream from server to client<br />over which all discussions' info are sent.<br /><br />The stream terminates when all discussions' info is transmitted. |
-| GetDiscussionHistoryByID | GetDiscussionHistoryByIDRequest | [GetDiscussionHistoryResponse](#services.GetDiscussionHistoryResponse) stream | Creates a unidirectional stream from server to client<br />over which all previously exchanged messages belonging to<br />a specific discussion are sent.<br /><br />The stream terminates when all discussion history is transmitted. |
-| GetDiscussionStatistics | GetDiscussionStatisticsRequest | [GetDiscussionStatisticsResponse](#services.GetDiscussionStatisticsResponse) | Calculates statistics about the requested discussion. |
-| AddDiscussion | AddDiscussionRequest | [AddDiscussionResponse](#services.AddDiscussionResponse) | Adds a discussion to the database. |
-| UpdateDiscussionLastRead | UpdateDiscussionLastReadRequest | [UpdateDiscussionResponse](#services.UpdateDiscussionResponse) | Updates a discussion's last read message. |
-| RemoveDiscussion | RemoveDiscussionRequest | [RemoveDiscussionResponse](#services.RemoveDiscussionResponse) | Remove a discussion from the database. |
+| GetDiscussions | [🔗](#getdiscussionsrequest) | [🔗](#getdiscussionsresponse) stream | Creates a unidirectional stream from server to client<br />over which all discussions' info are sent.<br /><br />The stream terminates when all discussions' info is transmitted. |
+| GetDiscussionHistoryByID | [🔗](#getdiscussionhistorybyidrequest) | [🔗](#getdiscussionhistoryresponse) stream | Creates a unidirectional stream from server to client<br />over which all previously exchanged messages belonging to<br />a specific discussion are sent.<br /><br />The stream terminates when all discussion history is transmitted. |
+| GetDiscussionStatistics | [🔗](#getdiscussionstatisticsrequest) | [🔗](#getdiscussionstatisticsresponse) | Calculates statistics about the requested discussion. |
+| AddDiscussion | [🔗](#adddiscussionrequest) | [🔗](#adddiscussionresponse) | Adds a discussion to the database. |
+| UpdateDiscussionLastRead | [🔗](#updatediscussionlastreadrequest) | [🔗](#updatediscussionresponse) | Updates a discussion's last read message. |
+| RemoveDiscussion | [🔗](#removediscussionrequest) | [🔗](#removediscussionresponse) | Remove a discussion from the database. |
 
 
 ### MessageService
@@ -43,9 +45,9 @@ to message creation and exchange.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| EstimateMessage | EstimateMessageRequest | [EstimateMessageResponse](#services.EstimateMessageResponse) | Estimates the route and fees for the requested message.<br /><br />In case of failure (payment amount too large or small, payload too large),<br />an empty response is returned. |
-| SendMessage | SendMessageRequest | [SendMessageResponse](#services.SendMessageResponse) | Sends a message<br /><br />In case of failure (payment amount too large or small, payload too large),<br />an empty response is returned. |
-| SubscribeMessages | SubscribeMessageRequest | [SubscribeMessageResponse](#services.SubscribeMessageResponse) stream | Creates a unidirectional stream from server to client<br />over which all received messages are sent.<br /><br />The stream does not terminate until the client stops it. |
+| EstimateMessage | [🔗](#estimatemessagerequest) | [🔗](#estimatemessageresponse) | Estimates the route and fees for the requested message.<br /><br />In case of failure (payment amount too large or small, payload too large),<br />an empty response is returned. |
+| SendMessage | [🔗](#sendmessagerequest) | [🔗](#sendmessageresponse) | Sends a message<br /><br />In case of failure (payment amount too large or small, payload too large),<br />an empty response is returned. |
+| SubscribeMessages | [🔗](#subscribemessagerequest) | [🔗](#subscribemessageresponse) stream | Creates a unidirectional stream from server to client<br />over which all received messages are sent.<br /><br />The stream does not terminate until the client stops it. |
 
 
 ### NodeInfoService
@@ -54,16 +56,18 @@ pertaining to queries about node information.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetVersion | VersionRequest | [Version](#services.Version) | Returns version information about the current daemon. |
-| GetSelfInfo | SelfInfoRequest | [SelfInfoResponse](#services.SelfInfoResponse) | Returns info about the current underlying node. |
-| GetSelfBalance | SelfBalanceRequest | [SelfBalanceResponse](#services.SelfBalanceResponse) | Returns the balance of the current underlying node. |
-| GetNodes | GetNodesRequest | [NodeInfoResponse](#services.NodeInfoResponse) | Lists all nodes on the Lightning network.<br /><br />Returns a list of all nodes visible to the underlying Lightning node,<br />including the address of the current node.<br />Nodes with private channels are not visible if not directly connected to<br />the underlying node. |
-| SearchNodeByAddress | SearchNodeByAddressRequest | [NodeInfoResponse](#services.NodeInfoResponse) | Searches for a Lighting node based on their Lightning address.<br /><br />Returns a list of all nodes with that address, which will be at most 1.<br />The node must be visible from the underlying node. |
-| SearchNodeByAlias | SearchNodeByAliasRequest | [NodeInfoResponse](#services.NodeInfoResponse) | Searches for a Lightning node based on their Lightning alias.<br /><br />Returns a list of all nodes with that alias visible from the underlying node. |
-| ConnectNode | ConnectNodeRequest | [ConnectNodeResponse](#services.ConnectNodeResponse) | Connects a node as a peer. |
+| GetVersion | [🔗](#versionrequest) | [🔗](#version) | Returns version information about the current daemon. |
+| GetSelfInfo | [🔗](#selfinforequest) | [🔗](#selfinforesponse) | Returns info about the current underlying node. |
+| GetSelfBalance | [🔗](#selfbalancerequest) | [🔗](#selfbalanceresponse) | Returns the balance of the current underlying node. |
+| GetNodes | [🔗](#getnodesrequest) | [🔗](#nodeinforesponse) | Lists all nodes on the Lightning network.<br /><br />Returns a list of all nodes visible to the underlying Lightning node,<br />including the address of the current node.<br />Nodes with private channels are not visible if not directly connected to<br />the underlying node. |
+| SearchNodeByAddress | [🔗](#searchnodebyaddressrequest) | [🔗](#nodeinforesponse) | Searches for a Lighting node based on their Lightning address.<br /><br />Returns a list of all nodes with that address, which will be at most 1.<br />The node must be visible from the underlying node. |
+| SearchNodeByAlias | [🔗](#searchnodebyaliasrequest) | [🔗](#nodeinforesponse) | Searches for a Lightning node based on their Lightning alias.<br /><br />Returns a list of all nodes with that alias visible from the underlying node. |
+| ConnectNode | [🔗](#connectnoderequest) | [🔗](#connectnoderesponse) | Connects a node as a peer. |
 
 
-# Messages
+
+
+## Messages
 
 ### AddContactRequest
 
@@ -72,7 +76,7 @@ Corresponds to a request to add a node as a contact.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| contact | [ContactInfo](#services.ContactInfo) |  | The node to add as a contact. |
+| contact | [ContactInfo](#contactinfo) |  | The node to add as a contact. |
 
 
 
@@ -84,7 +88,7 @@ A AddContactResponse is received in response to an AddContact rpc call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| contact | [ContactInfo](#services.ContactInfo) |  | The newly added contact's information. |
+| contact | [ContactInfo](#contactinfo) |  | The newly added contact's information. |
 
 
 
@@ -96,7 +100,7 @@ Corresponds to a request to add a discussion to database.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| discussion | [DiscussionInfo](#services.DiscussionInfo) |  |  |
+| discussion | [DiscussionInfo](#discussioninfo) |  |  |
 
 
 
@@ -108,7 +112,7 @@ An AddDiscussionResponse is received in response to an AddDiscussion rpc call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| discussion | [DiscussionInfo](#services.DiscussionInfo) |  |  |
+| discussion | [DiscussionInfo](#discussioninfo) |  |  |
 
 
 
@@ -152,7 +156,7 @@ A message representing a contact of the application.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| node | [NodeInfo](#services.NodeInfo) |  | The node corresponding to the contact. |
+| node | [NodeInfo](#nodeinfo) |  | The node corresponding to the contact. |
 | id | [uint64](#uint64) |  | The contact id. |
 | display_name | [string](#string) |  | A contact's chat nickname. |
 
@@ -168,7 +172,7 @@ Represents the information for a specific discussion.
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  | The discussion id. |
 | participants | [string](#string) | repeated | The list of participants in the discussion. |
-| options | [DiscussionOptions](#services.DiscussionOptions) |  |  |
+| options | [DiscussionOptions](#discussionoptions) |  |  |
 | last_read_msg_id | [uint64](#uint64) |  | The id of the last read message in the discussion. |
 | last_msg_id | [uint64](#uint64) |  | The id of the last discussion message. |
 
@@ -198,7 +202,7 @@ Corresponds to a request to estimate a message.
 | discussion_id | [uint64](#uint64) |  | The discussion id where the message is to be sent. |
 | payload | [string](#string) |  | The message payload (as a string). |
 | amt_msat | [int64](#int64) |  | The intended payment amount to the recipient of the message (in millisatoshi). |
-| options | [MessageOptions](#services.MessageOptions) |  | The message option overrides for the current message. |
+| options | [MessageOptions](#messageoptions) |  | The message option overrides for the current message. |
 
 
 
@@ -211,7 +215,7 @@ A EstimateMessageResponse is received in response to a EstimateMessage rpc call.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | success_prob | [double](#double) |  | The probability of successful arrival of the message,<br />as reported by the Lightning daemon's mission control. |
-| message | [Message](#services.Message) |  | Contains the estimated route and fees for the requested message. |
+| message | [Message](#message) |  | Contains the estimated route and fees for the requested message. |
 
 
 
@@ -229,7 +233,7 @@ A GetContactsResponse is received in response to a GetContacts rpc call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| contacts | [ContactInfo](#services.ContactInfo) | repeated | The list of contacts in the database. |
+| contacts | [ContactInfo](#contactinfo) | repeated | The list of contacts in the database. |
 
 
 
@@ -243,7 +247,7 @@ previously exchanged messages of the identified discussion.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  | The discussion id of interest. |
-| page_options | [KeySetPageOptions](#services.KeySetPageOptions) |  |  |
+| page_options | [KeySetPageOptions](#keysetpageoptions) |  |  |
 
 
 
@@ -256,7 +260,7 @@ a GetHistory rpc call, and represents an exchanged message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| message | [Message](#services.Message) |  | The exchanged message. |
+| message | [Message](#message) |  | The exchanged message. |
 
 
 
@@ -305,7 +309,7 @@ to a GetDiscussions rpc call, and represents a discussion.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| discussion | [DiscussionInfo](#services.DiscussionInfo) |  |  |
+| discussion | [DiscussionInfo](#discussioninfo) |  |  |
 
 
 
@@ -348,9 +352,9 @@ A message representing a message of the application.
 | payload | [string](#string) |  | The message payload. |
 | amt_msat | [int64](#int64) |  | The amount paid over this message (in millisatoshi). |
 | total_fees_msat | [int64](#int64) |  | The total routing fees paid for this message across all routes (in millisatoshi).<br /><br />This field is meaningful only for sent and estimated messages. |
-| sent_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The time the message was sent. |
-| received_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The time the message was received. |
-| payment_routes | [PaymentRoute](#services.PaymentRoute) | repeated | The routes that fulfilled this message.<br /><br />This field is meaningful only for sent and estimated messages. |
+| sent_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the message was sent. |
+| received_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the message was received. |
+| payment_routes | [PaymentRoute](#paymentroute) | repeated | The routes that fulfilled this message.<br /><br />This field is meaningful only for sent and estimated messages. |
 | preimage | [string](#string) |  | The preimage belonging to the associated payment.<br /><br />This field is only meaningful for received messages and<br />messages sent successfully to non-group discussions. |
 | pay_req | [string](#string) |  | The payment request this message was paid to.<br /><br />If empty, corresponds to a spontaneous payment. |
 
@@ -392,7 +396,7 @@ It contains all visible nodes corresponding to the query.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| nodes | [NodeInfo](#services.NodeInfo) | repeated | The list of Lightning nodes matching the query. |
+| nodes | [NodeInfo](#nodeinfo) | repeated | The list of Lightning nodes matching the query. |
 
 
 
@@ -464,7 +468,7 @@ A message representing a route fulfilling a payment HTLC.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hops | [PaymentHop](#services.PaymentHop) | repeated | The list of hops for this route. |
+| hops | [PaymentHop](#paymenthop) | repeated | The list of hops for this route. |
 | total_timelock | [uint32](#uint32) |  | The total timelock of the route. |
 | route_amt_msat | [int64](#int64) |  | The amount sent via this route, disregarding the route fees (in millisatoshi). |
 | route_fees_msat | [int64](#int64) |  | The fees paid for this route (in millisatoshi). |
@@ -582,8 +586,8 @@ A SelfInfoResponse is received in response to a GetSelfInfo rpc call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| info | [NodeInfo](#services.NodeInfo) |  | General node information about the current node. |
-| chains | [Chain](#services.Chain) | repeated | A list of chain networks the node is operating on. |
+| info | [NodeInfo](#nodeinfo) |  | General node information about the current node. |
+| chains | [Chain](#chain) | repeated | A list of chain networks the node is operating on. |
 
 
 
@@ -599,7 +603,7 @@ Corresponds to a request to send a message.
 | payload | [string](#string) |  | The message payload (as a string). |
 | amt_msat | [int64](#int64) |  | The intended payment amount to the recipient of the message (in millisatoshi). |
 | pay_req | [string](#string) |  | A payment request (invoice) to pay to.<br /><br />If empty, a spontaneous message is sent.<br />If specified, discussion_id is not used and should not be specified.<br />Instead, the message will be sent to the discussion associated with<br />the recipient specified by the the payment request (which will be<br />created if it does not exist).<br />The discussion_id will be returned in the response. |
-| options | [MessageOptions](#services.MessageOptions) |  | The message option overrides for the current message. |
+| options | [MessageOptions](#messageoptions) |  | The message option overrides for the current message. |
 
 
 
@@ -611,7 +615,7 @@ A SendMessageResponse is received in response to a SendMessage rpc call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sent_message | [Message](#services.Message) |  | The sent message. |
+| sent_message | [Message](#message) |  | The sent message. |
 
 
 
@@ -631,7 +635,7 @@ a SubscribeMessages rpc call, and represents a received message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| received_message | [Message](#services.Message) |  | The received message. |
+| received_message | [Message](#message) |  | The received message. |
 
 
 

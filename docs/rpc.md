@@ -5,8 +5,7 @@
 ## Services
 
 ### ChannelService
-ChannelService exposes endpoints pertaining
-to channel management.
+ChannelService exposes endpoints pertaining to channel management.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -14,8 +13,7 @@ to channel management.
 
 
 ### ContactService
-ContactService exposes endpoints pertaining to handling
-nodes of the Lightning network and contacts.
+ContactService exposes endpoints pertaining to contacts.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -31,7 +29,7 @@ to discussion creation, deletion and history.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetDiscussions | [🔗](#getdiscussionsrequest) | [🔗](#getdiscussionsresponse) stream | Creates a unidirectional stream from server to client<br />over which all discussions' info are sent.<br /><br />The stream terminates when all discussions' info is transmitted. |
+| GetDiscussions | [🔗](#getdiscussionsrequest) | [🔗](#getdiscussionsresponse) stream | Creates a unidirectional stream from server to client<br />over which all discussions' info are sent.<br /><br />The stream terminates when all discussion info is transmitted. |
 | GetDiscussionHistoryByID | [🔗](#getdiscussionhistorybyidrequest) | [🔗](#getdiscussionhistoryresponse) stream | Creates a unidirectional stream from server to client<br />over which all previously exchanged messages belonging to<br />a specific discussion are sent.<br /><br />The stream terminates when all discussion history is transmitted. |
 | GetDiscussionStatistics | [🔗](#getdiscussionstatisticsrequest) | [🔗](#getdiscussionstatisticsresponse) | Calculates statistics about the requested discussion. |
 | AddDiscussion | [🔗](#adddiscussionrequest) | [🔗](#adddiscussionresponse) | Adds a discussion to the database. |
@@ -172,7 +170,7 @@ Represents the information for a specific discussion.
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  | The discussion id. |
 | participants | [string](#string) | repeated | The list of participants in the discussion. |
-| options | [DiscussionOptions](#discussionoptions) |  |  |
+| options | [DiscussionOptions](#discussionoptions) |  | The default options applicable for all discussion messages. |
 | last_read_msg_id | [uint64](#uint64) |  | The id of the last read message in the discussion. |
 | last_msg_id | [uint64](#uint64) |  | The id of the last discussion message. |
 
@@ -247,7 +245,7 @@ previously exchanged messages of the identified discussion.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  | The discussion id of interest. |
-| page_options | [KeySetPageOptions](#keysetpageoptions) |  |  |
+| page_options | [KeySetPageOptions](#keysetpageoptions) |  | The pagination options of the request. |
 
 
 
@@ -339,7 +337,7 @@ If reverse is true, the returned elements end with last_id.
 
 ### Message
 
-A message representing a message of the application.
+Represents a message of the application.
 
 
 | Field | Type | Label | Description |
@@ -363,7 +361,7 @@ A message representing a message of the application.
 
 ### MessageOptions
 
-MessageOptions represents messaging options.
+Represents messaging options.
 
 
 | Field | Type | Label | Description |
@@ -411,8 +409,8 @@ Corresponds to a request to open a channel.
 | address | [string](#string) |  | The address of the node to open a channel to. |
 | amt_msat | [uint64](#uint64) |  | The total amount to be committed to the channel (in millisatoshi). |
 | push_amt_msat | [uint64](#uint64) |  | The amount to be sent to the other party (in millisatoshi). |
-| min_input_confs | [int32](#int32) |  | The minimum number of confirmations each input<br />of the channel funding transaction must have.<br /><br />In case of a negative value being provided, unconfirmed funds can be used. |
-| target_confirmation_block | [uint32](#uint32) |  | The number of blocks the funding transaction should confirm by.<br />This is used for fee estimation. |
+| min_input_confs | [int32](#int32) |  | The minimum number of confirmations<br />each input of the channel funding transaction must have.<br /><br />In case of a negative value being provided, unconfirmed funds can be used. |
+| target_confirmation_block | [uint32](#uint32) |  | The number of blocks the funding transaction should confirm by.<br /><br />Used for fee estimation. |
 | sat_per_vbyte | [uint64](#uint64) |  | The fee rate (satoshis per virtual byte) the funding transaction should cost. |
 
 
@@ -431,24 +429,9 @@ An OpenChannelResponse is received in response to an OpenChannel call.
 
 
 
-### PageOptions
-
-Corresponds to pagination parameters for requests.
-Represents a request for page_size elements,
-skipping the most recent skip_recent elements (reverse order).
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| skip_recent | [int64](#int64) |  | The number of most recent elements to skip. |
-| page_size | [int64](#int64) |  | The number of elements to return. |
-
-
-
-
 ### PaymentHop
 
-A message representing a hop of the route for sending a message.
+Represents a hop of a route of a message.
 
 
 | Field | Type | Label | Description |
@@ -463,7 +446,7 @@ A message representing a hop of the route for sending a message.
 
 ### PaymentRoute
 
-A message representing a route fulfilling a payment HTLC.
+Represents a route fulfilling a payment HTLC.
 
 
 | Field | Type | Label | Description |
@@ -526,7 +509,7 @@ A RemoveDiscussionResponse is received in response to a RemoveDiscussion rpc cal
 
 ### SearchNodeByAddressRequest
 
-Corresponds to a node query based on the node address.
+Corresponds to a node query based on node address.
 
 
 | Field | Type | Label | Description |
@@ -538,7 +521,7 @@ Corresponds to a node query based on the node address.
 
 ### SearchNodeByAliasRequest
 
-Corresponds to a node query based on the node alias.
+Corresponds to a node query based on node alias.
 
 
 | Field | Type | Label | Description |

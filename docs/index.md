@@ -63,6 +63,14 @@ pertaining to queries about node information.
 | ConnectNode | [🔗](#connectnoderequest) | [🔗](#connectnoderesponse) | Connects a node as a peer. |
 
 
+### PaymentService
+PaymentService exposes payment and invoice functionality.
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateInvoice | [🔗](#createinvoicerequest) | [🔗](#createinvoiceresponse) | Creates a new invoice. |
+
+
 
 
 ## Messages
@@ -157,6 +165,33 @@ A message representing a contact of the application.
 | node | [NodeInfo](#nodeinfo) |  | The node corresponding to the contact. |
 | id | [uint64](#uint64) |  | The contact id. |
 | display_name | [string](#string) |  | A contact's chat nickname. |
+
+
+
+
+### CreateInvoiceRequest
+
+Corresponds to an invoice creation request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| memo | [string](#string) |  | Memo of the invoice. |
+| amt_msat | [uint64](#uint64) |  | The invoice amount (in millisatoshi). |
+| expiry | [int64](#int64) |  | Invoice expiry time (in seconds since creation). |
+| private | [bool](#bool) |  | Whether to include hints for private channels. |
+
+
+
+
+### CreateInvoiceResponse
+
+A CreateInvoiceResponse is received in response to an invoice creation request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| invoice | [Invoice](#invoice) |  | The created invoice. |
 
 
 
@@ -315,6 +350,65 @@ to a GetDiscussions rpc call, and represents a discussion.
 ### GetNodesRequest
 
 Corresponds to a request to list all nodes on the Lightning Network.
+
+
+
+### HopHint
+
+Represents a hop hint.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pubkey | [string](#string) |  | Public key of hop ingress node. |
+| chan_id | [uint64](#uint64) |  | The short channel id of the channel to be used for the hop. |
+| fee_base_msat | [uint32](#uint32) |  | The base fee of the channel (in millisatoshi). |
+| fee_rate | [uint32](#uint32) |  | The fee rate of the channel (in microsatoshi/sat). |
+| cltv_expiry_delta | [uint32](#uint32) |  | The timelock delta of the channel. |
+
+
+
+
+### Invoice
+
+Represents an Lightning network invoice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| memo | [string](#string) |  | The invoice memo. |
+| hash | [string](#string) |  | The preimage hash. |
+| preimage | [string](#string) |  | The invoice preimage. |
+| payment_request | [string](#string) |  | The payment request of the invoice. |
+| value_msat | [uint64](#uint64) |  | The value (amount requested) of the invoice (in millisatoshi). |
+| amt_paid_msat | [uint64](#uint64) |  | The amount paid to the invoice (in millisatoshi). |
+| created_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the invoice was created. |
+| settled_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the invoice was settled. |
+| expiry | [int64](#int64) |  | The invoice expiry (in seconds since creation time). |
+| private | [bool](#bool) |  | Whether the invoice contains hints for private channels. |
+| route_hints | [RouteHint](#routehint) | repeated | Invoice route hints. |
+| state | [InvoiceState](#invoicestate) |  | The invoice state. |
+| add_index | [uint64](#uint64) |  | The add index of the invoice. |
+| settle_index | [uint64](#uint64) |  | The settle index of the invoice. |
+| invoice_htlcs | [InvoiceHTLC](#invoicehtlc) | repeated | The set of HTLCs paying to the invoice. |
+
+
+
+
+### InvoiceHTLC
+
+Represents an HTLC paying to an invoice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| chan_id | [uint64](#uint64) |  | The short channel id of the channel the HTLC was arrived. |
+| amt_msat | [uint64](#uint64) |  | The amount of this HTLC (in millisatoshi). |
+| state | [InvoiceHTLCState](#invoicehtlcstate) |  | State of the HTLC. |
+| accept_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | HTLC accept timestamp. |
+| resolve_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | HTLC resolve timestamp. |
+| expiry_height | [int32](#int32) |  | Block height at which this HTLC expires. |
+
 
 
 
@@ -504,6 +598,18 @@ Corresponds to a request to remove a discussion.
 ### RemoveDiscussionResponse
 
 A RemoveDiscussionResponse is received in response to a RemoveDiscussion rpc call.
+
+
+
+### RouteHint
+
+Represents a route hint for assistance in invoice payment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hop_hints | [HopHint](#hophint) | repeated | A chain of hop hints that can reach the desetination. |
+
 
 
 

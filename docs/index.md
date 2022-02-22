@@ -69,6 +69,7 @@ PaymentService exposes payment and invoice functionality.
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | CreateInvoice | [🔗](#createinvoicerequest) | [🔗](#createinvoiceresponse) | Creates a new invoice. |
+| LookupInvoice | [🔗](#lookupinvoicerequest) | [🔗](#lookupinvoiceresponse) | Performs an invoice lookup. |
 
 
 
@@ -425,6 +426,30 @@ If reverse is true, the returned elements end with last_id.
 | last_id | [uint64](#uint64) |  | The id of the first element of the requested range. |
 | page_size | [int64](#int64) |  | The number of elements to return. |
 | reverse | [bool](#bool) |  | Whether the range starts or ends with last_id element. |
+
+
+
+
+### LookupInvoiceRequest
+
+Corresponds to an invoice lookup request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pay_req | [string](#string) |  | Payment Request |
+
+
+
+
+### LookupInvoiceResponse
+
+A LookupResponse is received in response to an invoice lookup request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| invoice | [Invoice](#invoice) |  | The returned invoice. |
 
 
 

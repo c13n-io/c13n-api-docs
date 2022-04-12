@@ -34,7 +34,8 @@ to discussion creation, deletion and history.
 | GetDiscussionStatistics | [🔗](#getdiscussionstatisticsrequest) | [🔗](#getdiscussionstatisticsresponse) | Calculates statistics about the requested discussion. |
 | AddDiscussion | [🔗](#adddiscussionrequest) | [🔗](#adddiscussionresponse) | Adds a discussion to the database. |
 | UpdateDiscussionLastRead | [🔗](#updatediscussionlastreadrequest) | [🔗](#updatediscussionresponse) | Updates a discussion's last read message. |
-| RemoveDiscussion | [🔗](#removediscussionrequest) | [🔗](#removediscussionresponse) | Remove a discussion from the database. |
+| RemoveDiscussion | [🔗](#removediscussionrequest) | [🔗](#removediscussionresponse) | Removes a discussion from the database. |
+| Send | [🔗](#sendrequest) | [🔗](#sendresponse) | Sends a message. |
 
 
 ### MessageService
@@ -457,7 +458,7 @@ A LookupResponse is received in response to an invoice lookup request.
 
 ### Message
 
-Represents a message of the application.
+Represents a message sent over the Lightning network.
 
 
 | Field | Type | Label | Description |
@@ -465,16 +466,18 @@ Represents a message of the application.
 | id | [uint64](#uint64) |  | The unique id of the message. |
 | discussion_id | [uint64](#uint64) |  | The discussion id this message is associated with. |
 | sender | [string](#string) |  | The Lightning address of the sender node. |
-| receiver | [string](#string) |  | The Lightning address of the receiver node. |
+| receiver | [string](#string) |  | **Deprecated.** The Lightning address of the receiver node. |
 | sender_verified | [bool](#bool) |  | Whether the message sender was verified. |
 | payload | [string](#string) |  | The message payload. |
 | amt_msat | [int64](#int64) |  | The amount paid over this message (in millisatoshi). |
-| total_fees_msat | [int64](#int64) |  | The total routing fees paid for this message across all routes (in millisatoshi).<br /><br />This field is meaningful only for sent and estimated messages. |
+| total_fees_msat | [int64](#int64) |  | **Deprecated.** The total routing fees paid for this message across all routes (in millisatoshi).<br /><br />This field is meaningful only for sent and estimated messages. |
 | sent_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the message was sent. |
 | received_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the message was received. |
-| payment_routes | [PaymentRoute](#paymentroute) | repeated | The routes that fulfilled this message.<br /><br />This field is meaningful only for sent and estimated messages. |
-| preimage | [string](#string) |  | The preimage belonging to the associated payment.<br /><br />This field is only meaningful for received messages and<br />messages sent successfully to non-group discussions. |
-| pay_req | [string](#string) |  | The payment request this message was paid to.<br /><br />If empty, corresponds to a spontaneous payment. |
+| payment_routes | [PaymentRoute](#paymentroute) | repeated | **Deprecated.** The routes that fulfilled this message.<br /><br />This field is meaningful only for sent and estimated messages. |
+| preimage | [string](#string) |  | **Deprecated.** The preimage belonging to the associated payment.<br /><br />This field is only meaningful for received messages and<br />messages sent successfully to non-group discussions. |
+| pay_req | [string](#string) |  | **Deprecated.** The payment request this message was paid to.<br /><br />If empty, corresponds to a spontaneous payment. |
+| payments | [Payments](#payments) |  |  |
+| invoice | [Invoice](#invoice) |  |  |
 
 
 
@@ -654,6 +657,18 @@ Represents a route fulfilling a payment HTLC.
 
 
 
+### Payments
+
+Represents a list of payments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| payments | [Payment](#payment) | repeated | The list of payments fulfilling a message. |
+
+
+
+
 ### RemoveContactByAddressRequest
 
 Corresponds to a request to remove a contact.
@@ -801,6 +816,34 @@ Corresponds to a request to send a message.
 ### SendMessageResponse
 
 A SendMessageResponse is received in response to a SendMessage rpc call.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sent_message | [Message](#message) |  | The sent message. |
+
+
+
+
+### SendRequest
+
+Represents a request to send a message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| discussion_id | [uint64](#uint64) |  | The discussion where the message is to be sent. |
+| pay_req | [string](#string) |  | The payment request to fulfil.<br /><br />If empty, a spontaneous message is sent.<br />A discussion with the recipient node will be created if it does not exist. |
+| amt_msat | [int64](#int64) |  | The intended amount to be used for payment to each recipient. |
+| payload | [string](#string) |  | The message payload. |
+| options | [MessageOptions](#messageoptions) |  | The message options for the current message (overriding any discussion options). |
+
+
+
+
+### SendResponse
+
+A SendResponse is received in response to a Send rpc call.
 
 
 | Field | Type | Label | Description |

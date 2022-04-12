@@ -70,6 +70,7 @@ PaymentService exposes payment and invoice functionality.
 | ----------- | ------------ | ------------- | ------------|
 | CreateInvoice | [🔗](#createinvoicerequest) | [🔗](#createinvoiceresponse) | Creates a new invoice. |
 | LookupInvoice | [🔗](#lookupinvoicerequest) | [🔗](#lookupinvoiceresponse) | Performs an invoice lookup. |
+| Pay | [🔗](#payrequest) | [🔗](#payresponse) | Performs a payment. |
 
 
 
@@ -548,6 +549,69 @@ An OpenChannelResponse is received in response to an OpenChannel call.
 
 
 
+### PayRequest
+
+Corresponds to a pay request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pay_req | [string](#string) |  | The payment request to pay to. |
+| address | [string](#string) |  | The address to pay to. |
+| amt_msat | [uint64](#uint64) |  | The payment amount (in millisatoshi). |
+| options | [PaymentOptions](#paymentoptions) |  | The payment options. |
+
+
+
+
+### PayResponse
+
+A PayResponse is received in response to a pay request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| payment | [Payment](#payment) |  | The returned payment. |
+
+
+
+
+### Payment
+
+Represents a Lightning network payment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hash | [string](#string) |  | The payment hash of the payment. |
+| preimage | [string](#string) |  | The preimage of the payment hash. |
+| amt_msat | [uint64](#uint64) |  | The payment amount. |
+| created_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the payment was created. |
+| resolved_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the payment was finalized. |
+| pay_req | [string](#string) |  | The fulfilled payment request (if any). |
+| state | [PaymentState](#paymentstate) |  | The payment state. |
+| payment_index | [uint64](#uint64) |  | The payment index. |
+| HTLCs | [PaymentHTLC](#paymenthtlc) | repeated | The payment HTLCs. |
+
+
+
+
+### PaymentHTLC
+
+Represents an HTLC attempt of a payment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| route | [PaymentRoute](#paymentroute) |  | The route of the HTLC. |
+| attempt_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the HTLC was sent. |
+| resolve_timestamp | [google.protobuf.Timestamp](#google.protobuf.timestamp) |  | The time the HTLC was resolved. |
+| state | [HTLCState](#htlcstate) |  | The HTLC state. |
+| preimage | [string](#string) |  | The preimage used to settle the HTLC. |
+
+
+
+
 ### PaymentHop
 
 Represents a hop of a route of a message.
@@ -559,6 +623,18 @@ Represents a hop of a route of a message.
 | hop_address | [string](#string) |  | The address of the hop node. |
 | amt_to_forward_msat | [int64](#int64) |  | The amount to be forwarded by the hop (in millisatoshi). |
 | fee_msat | [int64](#int64) |  | The fee to be paid to the hop for forwarding the message (in millisatoshi). |
+
+
+
+
+### PaymentOptions
+
+PaymentOptions represents the payment's options.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| fee_limit_msat | [int64](#int64) |  | The maximum fee allowed for sending a payment. |
 
 
 

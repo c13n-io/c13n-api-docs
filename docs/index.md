@@ -30,7 +30,7 @@ to discussion creation, deletion and history.
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetDiscussions | [🔗](#getdiscussionsrequest) | [🔗](#getdiscussionsresponse) stream | Creates a unidirectional stream from server to client<br />over which all discussions' info are sent.<br /><br />The stream terminates when all discussion info is transmitted. |
-| GetDiscussionHistoryByID | [🔗](#getdiscussionhistorybyidrequest) | [🔗](#getdiscussionhistoryresponse) stream | Creates a unidirectional stream from server to client<br />over which all previously exchanged messages belonging to<br />a specific discussion are sent.<br /><br />The stream terminates when all discussion history is transmitted. |
+| GetDiscussionHistoryByID | [🔗](#getdiscussionhistorybyidrequest) | [🔗](#getdiscussionhistoryresponse) stream | Creates a unidirectional stream from server to client<br />over which previously exchanged messages belonging to<br />a specific discussion are sent.<br /><br />The stream terminates when all requested discussion messages are transmitted. |
 | GetDiscussionStatistics | [🔗](#getdiscussionstatisticsrequest) | [🔗](#getdiscussionstatisticsresponse) | Calculates statistics about the requested discussion. |
 | AddDiscussion | [🔗](#adddiscussionrequest) | [🔗](#adddiscussionresponse) | Adds a discussion to the database. |
 | UpdateDiscussionLastRead | [🔗](#updatediscussionlastreadrequest) | [🔗](#updatediscussionresponse) | Updates a discussion's last read message. |

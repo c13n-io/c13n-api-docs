@@ -73,7 +73,6 @@ PaymentService exposes payment and invoice functionality.
 | LookupInvoice | [🔗](#lookupinvoicerequest) | [🔗](#lookupinvoiceresponse) | Performs an invoice lookup. |
 | Pay | [🔗](#payrequest) | [🔗](#payresponse) | Performs a payment. |
 | SubscribeInvoices | [🔗](#subscribeinvoicesrequest) | [🔗](#invoice) stream | Subscribes to invoice (final state) updates. |
-| SubscribePayments | [🔗](#subscribepaymentsrequest) | [🔗](#payment) stream | Subscribes to payment (final state) updates. |
 
 
 
@@ -878,12 +877,6 @@ a SubscribeMessages rpc call, and represents a received message.
 | ----- | ---- | ----- | ----------- |
 | received_message | [Message](#message) |  | The received message. |
 
-
-
-
-### SubscribePaymentsRequest
-
-Corresponds to a subscription request for payment updates.
 
 
 

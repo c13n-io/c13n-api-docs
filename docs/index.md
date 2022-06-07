@@ -36,6 +36,7 @@ to discussion creation, deletion and history.
 | UpdateDiscussionLastRead | [🔗](#updatediscussionlastreadrequest) | [🔗](#updatediscussionresponse) | Updates a discussion's last read message. |
 | RemoveDiscussion | [🔗](#removediscussionrequest) | [🔗](#removediscussionresponse) | Removes a discussion from the database. |
 | Send | [🔗](#sendrequest) | [🔗](#sendresponse) | Sends a message. |
+| Subscribe | [🔗](#subscribemessagesrequest) | [🔗](#message) stream | Creates a unidirectional stream<br />over which to be notified of all transmitted messages. |
 
 
 ### MessageService
@@ -878,6 +879,12 @@ a SubscribeMessages rpc call, and represents a received message.
 | ----- | ---- | ----- | ----------- |
 | received_message | [Message](#message) |  | The received message. |
 
+
+
+
+### SubscribeMessagesRequest
+
+Corresponds to a message subscription request.
 
 
 

@@ -75,6 +75,7 @@ PaymentService exposes payment and invoice functionality.
 | Pay | [🔗](#payrequest) | [🔗](#payresponse) | Performs a payment. |
 | SubscribeInvoices | [🔗](#subscribeinvoicesrequest) | [🔗](#invoice) stream | Subscribes to invoice (final state) updates. |
 | SubscribePayments | [🔗](#subscribepaymentsrequest) | [🔗](#payment) stream | Subscribes to payment (final state) updates. |
+| GetRoute | [🔗](#routerequest) | [🔗](#routeresponse) | Attempts to find a route capable of carrying<br />the requested amount to the destination. |
 
 
 
@@ -728,6 +729,33 @@ Represents a route hint for assistance in invoice payment.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hop_hints | [HopHint](#hophint) | repeated | A chain of hop hints that can reach the desetination. |
+
+
+
+
+### RouteRequest
+
+Corresponds to a route discovery request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pay_req | [string](#string) |  | The payment request to pay to. |
+| address | [string](#string) |  | The address to pay to. |
+| amt_msat | [uint64](#uint64) |  | The payment amount (in millisatoshi). |
+| options | [PaymentOptions](#paymentoptions) |  | The payment options. |
+
+
+
+
+### RouteResponse
+
+A RouteResponse is received in response to a route discovery request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| route | [PaymentRoute](#paymentroute) |  | A route that can fulfil the requested payment. |
 
 
 

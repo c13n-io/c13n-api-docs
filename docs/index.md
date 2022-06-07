@@ -72,6 +72,8 @@ PaymentService exposes payment and invoice functionality.
 | CreateInvoice | [🔗](#createinvoicerequest) | [🔗](#createinvoiceresponse) | Creates a new invoice. |
 | LookupInvoice | [🔗](#lookupinvoicerequest) | [🔗](#lookupinvoiceresponse) | Performs an invoice lookup. |
 | Pay | [🔗](#payrequest) | [🔗](#payresponse) | Performs a payment. |
+| SubscribeInvoices | [🔗](#subscribeinvoicesrequest) | [🔗](#invoice) stream | Subscribes to invoice (final state) updates. |
+| SubscribePayments | [🔗](#subscribepaymentsrequest) | [🔗](#payment) stream | Subscribes to payment (final state) updates. |
 
 
 
@@ -853,6 +855,12 @@ A SendResponse is received in response to a Send rpc call.
 
 
 
+### SubscribeInvoicesRequest
+
+Corresponds to a subscription request for invoice updates.
+
+
+
 ### SubscribeMessageRequest
 
 Corresponds to a request to create a stream
@@ -870,6 +878,12 @@ a SubscribeMessages rpc call, and represents a received message.
 | ----- | ---- | ----- | ----------- |
 | received_message | [Message](#message) |  | The received message. |
 
+
+
+
+### SubscribePaymentsRequest
+
+Corresponds to a subscription request for payment updates.
 
 
 

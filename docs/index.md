@@ -77,6 +77,7 @@ PaymentService exposes payment and invoice functionality.
 | SubscribePayments | [🔗](#subscribepaymentsrequest) | [🔗](#payment) stream | Subscribes to payment (final state) updates. |
 | GetRoute | [🔗](#routerequest) | [🔗](#routeresponse) | Attempts to find a route capable of carrying<br />the requested amount to the destination. |
 | GetInvoices | [🔗](#getinvoicesrequest) | [🔗](#invoice) stream | Retrieves invoices from the database. |
+| GetPayments | [🔗](#getpaymentsrequest) | [🔗](#payment) stream | Retrieves payments from the database. |
 
 
 
@@ -370,6 +371,18 @@ Corresponds to an invoice retrieval request.
 ### GetNodesRequest
 
 Corresponds to a request to list all nodes on the Lightning Network.
+
+
+
+### GetPaymentsRequest
+
+Corresponds to a payment retrieval request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_options | [KeySetPageOptions](#keysetpageoptions) |  | The pagination options of the request. |
+
 
 
 

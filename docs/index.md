@@ -76,6 +76,7 @@ PaymentService exposes payment and invoice functionality.
 | SubscribeInvoices | [🔗](#subscribeinvoicesrequest) | [🔗](#invoice) stream | Subscribes to invoice (final state) updates. |
 | SubscribePayments | [🔗](#subscribepaymentsrequest) | [🔗](#payment) stream | Subscribes to payment (final state) updates. |
 | GetRoute | [🔗](#routerequest) | [🔗](#routeresponse) | Attempts to find a route capable of carrying<br />the requested amount to the destination. |
+| GetInvoices | [🔗](#getinvoicesrequest) | [🔗](#invoice) stream | Retrieves invoices from the database. |
 
 
 
@@ -350,6 +351,18 @@ to a GetDiscussions rpc call, and represents a discussion.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | discussion | [DiscussionInfo](#discussioninfo) |  |  |
+
+
+
+
+### GetInvoicesRequest
+
+Corresponds to an invoice retrieval request.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_options | [KeySetPageOptions](#keysetpageoptions) |  | The pagination options of the request. |
 
 
 
